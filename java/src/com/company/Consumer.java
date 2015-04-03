@@ -1,6 +1,4 @@
-package com.company;
-
-/**
+package com.company; /**
  * Created by grzegorz on 01.04.15.
  */
 

@@ -1,20 +1,13 @@
-package com.company;
-
-import javax.bluetooth.*;
+import java.util.Enumeration;
 import java.util.Vector;
+import javax.bluetooth.DeviceClass;
+import javax.bluetooth.DiscoveryAgent;
+import javax.bluetooth.DiscoveryListener;
+import javax.bluetooth.LocalDevice;
+import javax.bluetooth.RemoteDevice;
+import javax.bluetooth.ServiceRecord;
 
-/**
- * Created by grzegorz on 01.04.15.
- */
-public class uart_communication {
-
-
-    public void run() {
-
-        Vector devices = getDevices();
-        System.out.println(devices);
-
-    }
+public class RemoteDeviceDiscovery {
 
     public Vector getDevices() {
         /* Create Vector variable */
@@ -62,5 +55,4 @@ public class uart_communication {
         /* Return list of devices */
         return devicesDiscovered;
     }
-
 }
