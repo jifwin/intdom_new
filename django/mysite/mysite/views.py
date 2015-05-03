@@ -1,0 +1,73 @@
+__author__ = 'mehow'
+from django.http import HttpResponse
+from django.views.generic import View
+from django.views.generic.base import TemplateView
+from django.http import HttpResponse
+from django.template import RequestContext, loader
+from django.shortcuts import render
+import sys
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
+
+
+
+def get(self, request, *args, **kwargs):
+    return HttpResponse('Hello, World!')
+
+
+def control(request):
+
+    template = loader.get_template('control/index.html')
+    context = RequestContext(request,
+    {
+
+        'jakkolwiek':'dupa'
+
+    })
+    return HttpResponse(template.render(context))
+
+
+def login_page(request):
+
+    if not request.user.is_authenticated():
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            context = RequestContext(request,
+            {
+            'status': "Login Success!"
+            })
+            #redirect to success page
+
+        else:
+            context = RequestContext(request,
+            {
+            'status': "Login Failed!"
+            })
+
+        template = loader.get_template('control/login.html')
+
+        return HttpResponse(template.render(context))
+
+    else:
+        #todo: already logged in
+        template = loader.get_template('control/login.html')
+
+
+        context = RequestContext(request,
+        {
+        'status': "Already logged in!"
+        })
+
+
+        return HttpResponse(template.render(context))
+
+def logout_page(request):
+    logout(request)
+    template = loader.get_template('control/logout.html')
+    context = RequestContext(request,{})
+    return HttpResponse(template.render(context))
