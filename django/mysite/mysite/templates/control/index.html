@@ -65,10 +65,106 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Panel sterowania</h1>
+        <h1>Panel sterowania</h1>          <p></p>
+          <div>
+          {% if user.is_authenticated %}
 
+
+<!-- improve todo: -->
+              <div class="col-md-4">
+                <h2>Wszystko</h2>
+		        <p>
+                    <input id="sw01" type="checkbox" checked>
+                </p>
+                <div class="btn-group">
+                      <button type="button" data-switch-toggle="state" class="btn btn-default" number="01">Toggle</button>
+                      <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="01">Set true</button>
+                      <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="01">Set false</button>
+                      <button type="button" data-switch-reset="state" class="btn btn-default" number="01">Blink</button> <!-- rozkminic -->
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h2>Wszystko2</h2>
+		        <p>
+                    <input id="sw02" type="checkbox" checked>
+                </p>
+                <div class="btn-group">
+                      <button type="button" data-switch-toggle="state" class="btn btn-default" number="02">Toggle</button>
+                      <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="02">Set true</button>
+                      <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="02">Set false</button>
+                      <button type="button" data-switch-reset="state" class="btn btn-default" number="02">Blink</button> <!-- rozkminic -->
+                </div>
+              </div>
+
+
+
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+              <script src="/static/control/switch/bootstrap-switch-master/dist/js/bootstrap-switch.js"></script>
+              <script type="text/javascript">
+                $("[id='sw01']").bootstrapSwitch();
+                $("[id='sw02']").bootstrapSwitch();
+
+
+
+
+                $(function() {
+
+                $('[data-switch-set]').on("click", function() {
+                    var type = $(this).data('switch-set');
+                    var value = $(this).data('switch-value');
+                    var number = $(this).attr("number");
+
+                    $('#sw' + number).bootstrapSwitch('state', $(this).data('switch-value'));
+
+                    /*//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!
+                            if(value == true) {
+                                $.get('/control_panel/control/'+number+'/on')
+                            }
+                            if(value == false) {
+                                $.get('/control_panel/control/'+number+'/off')
+                            }
+                        */
+                });
+
+                $('[data-switch-toggle]').on("click", function() {
+                    var type = $(this).data('switch-toggle');
+
+                    var number = $(this).attr("number");
+
+                    $('#sw' + number).bootstrapSwitch('toggle' + type.charAt(0).toUpperCase() + type.slice(1));
+                    //	$.get('/control_panel/control/'+number+'/toggle')//AKCJA!
+
+
+                });
+
+
+
+                $('[data-switch-reset]').on("click", function() {
+                    var number = $(this).attr("number");
+
+                    //$.get('/control_panel/control/' + number + '/blink') //AKCJA!
+                });
+
+                $("input[id^='switch-state']").on('switchChange.bootstrapSwitch', function(event, state) {
+
+                    var id = $(this).attr("id");
+                    var number = id.substr(id.length - 2);//a po co to było? //chyba juz wiem
+
+                    //AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!
+                    if (state == true) {
+                        //$.get('/control_panel/control/' + number + '/on')
+                    } else {
+                        //$.get('/control_panel/control/' + number + '/off')
+                    }
+                });
+
+            });
+              </script>
+
+          {% endif %}
               </div>
     </div>
+        </div>
           <footer>
         <p>&copy; Grzegorz Pietrusza & Michał Bardziński</p>
       </footer>
