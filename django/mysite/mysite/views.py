@@ -8,14 +8,14 @@ from django.shortcuts import render
 import sys
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-
-
+import socket
+import simplejson
 
 def get(self, request, *args, **kwargs):
     return HttpResponse('Hello, World!')
 
 
-def control(request):
+def index(request):
 
     template = loader.get_template('control/index.html')
     context = RequestContext(request,
@@ -26,7 +26,25 @@ def control(request):
     })
     return HttpResponse(template.render(context))
 
+def control(request,device,action):
 
+    if request.user.is_authenticated():
+        action_table={"blink":0,"off":1,"on":2,"toggle":3}
+        device = int(device)
+        msg_code=chr(device*4+action_table[action] + 65)
+        print msg_code
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect(("192.168.0.14", 9090))
+        s.sendall(str(msg_code))
+        s.close()
+
+    else:
+        body_text = "Not Logged in!"
+
+    #template = loader.get_template('control_panel/control.html')
+
+    return HttpResponse('OK')
 def login_page(request):
 
     if not request.user.is_authenticated():
@@ -71,3 +89,16 @@ def logout_page(request):
     template = loader.get_template('control/logout.html')
     context = RequestContext(request,{})
     return HttpResponse(template.render(context))
+def send_light(request):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(("192.168.0.14", 9090))
+    s.sendall("Z\n")
+
+    response = s.recv(4)
+    s.close()
+    response = response.replace("\n","")
+
+    serialized_data = simplejson.dumps({"value": response})
+    return HttpResponse(serialized_data, content_type="application/json")
+
+

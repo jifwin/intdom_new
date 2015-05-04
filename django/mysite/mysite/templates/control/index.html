@@ -21,11 +21,18 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
     <![endif]-->
 
   </head>
 
   <body>
+
+      <script src="/static/control/js/jquery-1.8.2.min.js"></script>
+      <script src="/static/control/js/highcharts.js"></script>
+      <script src="/static/control/js/highcharts-more.js"></script>
+      <script src="/static/control/js/solid-gauge.js"></script>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -80,7 +87,7 @@
                       <button type="button" data-switch-toggle="state" class="btn btn-default" number="01">Toggle</button>
                       <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="01">Set true</button>
                       <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="01">Set false</button>
-                      <button type="button" data-switch-reset="state" class="btn btn-default" number="01">Blink</button> <!-- rozkminic -->
+                      <button type="button" data-switch-reset="state" class="btn btn-default" number="01">Reset</button> <!-- rozkminic -->
                 </div>
               </div>
               <div class="col-md-4">
@@ -92,13 +99,18 @@
                       <button type="button" data-switch-toggle="state" class="btn btn-default" number="02">Toggle</button>
                       <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="02">Set true</button>
                       <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="02">Set false</button>
-                      <button type="button" data-switch-reset="state" class="btn btn-default" number="02">Blink</button> <!-- rozkminic -->
+                      <button type="button" data-switch-reset="state" class="btn btn-default" number="02">Reset</button> <!-- rozkminic -->
                 </div>
+              </div>
+              <div class="col-md-4">
+                <h2>Czujnik światła</h2>
+                <p>
+		        <div id="gauge" style="width: 300px; height: 200px; float: left"></div>
+	            </p>
               </div>
 
 
 
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
               <script src="/static/control/switch/bootstrap-switch-master/dist/js/bootstrap-switch.js"></script>
               <script type="text/javascript">
                 $("[id='sw01']").bootstrapSwitch();
@@ -116,14 +128,15 @@
 
                     $('#sw' + number).bootstrapSwitch('state', $(this).data('switch-value'));
 
-                    /*//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!
+                    //AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!
                             if(value == true) {
-                                $.get('/control_panel/control/'+number+'/on')
+                                $.get('control/'+number+'/on')
+                                console.log(number)
                             }
                             if(value == false) {
-                                $.get('/control_panel/control/'+number+'/off')
+                                $.get('control/'+number+'/off')
                             }
-                        */
+
                 });
 
                 $('[data-switch-toggle]').on("click", function() {
@@ -132,8 +145,7 @@
                     var number = $(this).attr("number");
 
                     $('#sw' + number).bootstrapSwitch('toggle' + type.charAt(0).toUpperCase() + type.slice(1));
-                    //	$.get('/control_panel/control/'+number+'/toggle')//AKCJA!
-
+                    	$.get('/control/'+number+'/toggle')//AKCJA!
 
                 });
 
@@ -142,19 +154,19 @@
                 $('[data-switch-reset]').on("click", function() {
                     var number = $(this).attr("number");
 
-                    //$.get('/control_panel/control/' + number + '/blink') //AKCJA!
+                    $.get('/control/' + number + '/blink') //AKCJA!
                 });
 
-                $("input[id^='switch-state']").on('switchChange.bootstrapSwitch', function(event, state) {
+                $("input[id^='sw']").on('switchChange.bootstrapSwitch', function(event, state) {
 
                     var id = $(this).attr("id");
                     var number = id.substr(id.length - 2);//a po co to było? //chyba juz wiem
 
                     //AKCJA!//AKCJA!//AKCJA!//AKCJA!//AKCJA!
                     if (state == true) {
-                        //$.get('/control_panel/control/' + number + '/on')
+                        $.get('/control/' + number + '/on')
                     } else {
-                        //$.get('/control_panel/control/' + number + '/off')
+                        $.get('/control/' + number + '/off')
                     }
                 });
 
@@ -168,5 +180,6 @@
           <footer>
         <p>&copy; Grzegorz Pietrusza & Michał Bardziński</p>
       </footer>
+        <script src="/static/control/js/light_sensor.js"></script>
   </body>
 </html>
