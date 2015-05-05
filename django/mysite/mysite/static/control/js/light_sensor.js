@@ -140,7 +140,7 @@ $(function () {
             name: 'RPM',
             data: [1],
             dataLabels: {
-                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                format: '<div style="text-align:center"><span style="font-size:25px;color:#EEE' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
                        '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
             },

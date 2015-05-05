@@ -35,7 +35,7 @@ def control(request,device,action):
         print msg_code
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(("192.168.0.14", 9090))
+        s.connect(("192.168.0.12", 9090))
         s.sendall(str(msg_code))
         s.close()
 
@@ -91,7 +91,7 @@ def logout_page(request):
     return HttpResponse(template.render(context))
 def send_light(request):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("192.168.0.14", 9090))
+    s.connect(("192.168.0.12", 9090))
     s.sendall("Z\n")
 
     response = s.recv(4)

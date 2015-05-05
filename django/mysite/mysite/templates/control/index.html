@@ -72,50 +72,96 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Panel sterowania</h1>          <p></p>
-          <div>
+        <center><h1>Panel sterowania</h1></center>
+          </div></div>
+
           {% if user.is_authenticated %}
 
 
 <!-- improve todo: -->
+        <div class="container">
+            <div class="row">
               <div class="col-md-4">
-                <h2>Wszystko</h2>
+                <center><h2>Urządzenie 1</h2>
 		        <p>
-                    <input id="sw01" type="checkbox" checked>
+                    <input id="sw01" type="checkbox" checked  data-handle-width="50">
                 </p>
                 <div class="btn-group">
                       <button type="button" data-switch-toggle="state" class="btn btn-default" number="01">Toggle</button>
                       <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="01">Set true</button>
                       <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="01">Set false</button>
                       <button type="button" data-switch-reset="state" class="btn btn-default" number="01">Reset</button> <!-- rozkminic -->
-                </div>
+                </div></center>
               </div>
+
+
               <div class="col-md-4">
-                <h2>Wszystko2</h2>
+                <center><h2>Urządzenie 2</h2></center>
 		        <p>
-                    <input id="sw02" type="checkbox" checked>
+                    <center><input id="sw02" type="checkbox" checked data-handle-width="50"></center>
                 </p>
-                <div class="btn-group">
+                 <center><div class="btn-group">
                       <button type="button" data-switch-toggle="state" class="btn btn-default" number="02">Toggle</button>
                       <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="02">Set true</button>
                       <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="02">Set false</button>
                       <button type="button" data-switch-reset="state" class="btn btn-default" number="02">Reset</button> <!-- rozkminic -->
+                </div></center></div>
+                <div class="col-md-4">
+                <center><h2>Urządzenie 3</h2></center>
+		        <p>
+                    <center><input id="sw03" type="checkbox" checked data-handle-width="50"></center>
+                </p>
+                 <center><div class="btn-group">
+                      <button type="button" data-switch-toggle="state" class="btn btn-default" number="03">Toggle</button>
+                      <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="03">Set true</button>
+                      <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="03">Set false</button>
+                      <button type="button" data-switch-reset="state" class="btn btn-default" number="03">Reset</button> <!-- rozkminic -->
+                </div></center></div>
                 </div>
-              </div>
+    <div class="row">
               <div class="col-md-4">
-                <h2>Czujnik światła</h2>
-                <p>
-		        <div id="gauge" style="width: 300px; height: 200px; float: left"></div>
-	            </p>
+                <center><h2>Urządzenie 4</h2>
+		        <p>
+                    <input id="sw04" type="checkbox" checked  data-handle-width="50">
+                </p>
+                <div class="btn-group">
+                      <button type="button" data-switch-toggle="state" class="btn btn-default" number="04">Toggle</button>
+                      <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="04">Set true</button>
+                      <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="04">Set false</button>
+                      <button type="button" data-switch-reset="state" class="btn btn-default" number="04">Reset</button> <!-- rozkminic -->
+                </div></center>
               </div>
 
+
+              <div class="col-md-4">
+                <center><h2>Urządzenie 5</h2></center>
+		        <p>
+                    <center><input id="sw05" type="checkbox" checked data-handle-width="50"></center>
+                </p>
+                 <center><div class="btn-group">
+                      <button type="button" data-switch-toggle="state" class="btn btn-default" number="05">Toggle</button>
+                      <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default" number="05">Set true</button>
+                      <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default" number="05">Set false</button>
+                      <button type="button" data-switch-reset="state" class="btn btn-default" number="05">Reset</button> <!-- rozkminic -->
+                </div></center></div>
+
+              <div class="col-md-4">
+               <center><h2>Czujnik światła</h2>
+                <p>
+		        <div id="gauge" style="width: 300px; height: 200px; float: left"></div>
+	            </p></center>
+              </div>
+            </div>
+        </div>
 
 
               <script src="/static/control/switch/bootstrap-switch-master/dist/js/bootstrap-switch.js"></script>
               <script type="text/javascript">
                 $("[id='sw01']").bootstrapSwitch();
                 $("[id='sw02']").bootstrapSwitch();
-
+                $("[id='sw03']").bootstrapSwitch();
+                $("[id='sw04']").bootstrapSwitch();
+                $("[id='sw05']").bootstrapSwitch();
 
 
 
@@ -174,12 +220,13 @@
               </script>
 
           {% endif %}
-              </div>
-    </div>
-        </div>
+      <hr>
+
+        <div class="container">
           <footer>
         <p>&copy; Grzegorz Pietrusza & Michał Bardziński</p>
       </footer>
-        <script src="/static/control/js/light_sensor.js"></script>
+        </div>
+            <script src="/static/control/js/light_sensor.js"></script>
   </body>
 </html>
